@@ -1,0 +1,481 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="aRtist">
+    <title>Drop-seq: single-cell sequencing in large scale - aRtist</title>
+    <meta name="author" content="Yun Yan">
+    
+    
+        <link rel="icon" href="http://yoursite.com/assets/images/favicon.ico">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="Drop-seq greatly improves the through-put of single-cell sequencing where transcriptome data of thousands of cells could be generated. This post highlights 3 features, 1 tech issue, 1 aspect of downst">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Drop-seq: single-cell sequencing in large scale">
+<meta property="og:url" content="http://yoursite.com/2016/01/13/Drop-seq-single-cell-sequencing-in-large-scale/index.html">
+<meta property="og:site_name" content="aRtist">
+<meta property="og:description" content="Drop-seq greatly improves the through-put of single-cell sequencing where transcriptome data of thousands of cells could be generated. This post highlights 3 features, 1 tech issue, 1 aspect of downst">
+<meta property="og:image" content="http://yoursite.com/drop-seq-umi-design.png">
+<meta property="og:image" content="http://yoursite.com/drop-seq-rna-hybrid.png">
+<meta property="og:image" content="http://yoursite.com/drop-seq-data.png">
+<meta property="og:updated_time" content="2016-01-28T19:44:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Drop-seq: single-cell sequencing in large scale">
+<meta name="twitter:description" content="Drop-seq greatly improves the through-put of single-cell sequencing where transcriptome data of thousands of cells could be generated. This post highlights 3 features, 1 tech issue, 1 aspect of downst">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="http://yoursite.com/assets/images/yunyan.jpg"/>
+    
+    
+    
+        <meta property="og:image" content="http://yoursite.com/2016/01/13/Drop-seq-single-cell-sequencing-in-large-scale/drop-seq-cover.jpeg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://yoursite.com/2016/01/13/Drop-seq-single-cell-sequencing-in-large-scale/drop-seq-cover.jpeg" />
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-ejlztp1tasruqfvoz6xmgqng0anzae8ox7cqjj5yibieqgcmhe9fwxfae6zj.min.css" type="text/css">
+    <!--STYLES END-->
+    
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">aRtist</a>
+    </h1>
+    
+        
+            <a  class="header-right-picture "
+                href="http://puriney.github.io/yunyan/about.html" target="_blank">
+        
+        
+            <img class="header-picture" src="/assets/images/yunyan.jpg"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/yunyan.jpg"/>
+            </a>
+            <span class="sidebar-profile-name">Yun Yan</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://github.com/Puriney" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github-square"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://twitter.com/yun2yan" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-twitter-square"></i>
+                    <span class="sidebar-button-desc">Twitter</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+        <div class="post-header-cover
+                    text-left
+                    post-header-cover--80%"
+             style="background-image:url('/2016/01/13/Drop-seq-single-cell-sequencing-in-large-scale/drop-seq-cover.jpeg');"
+             data-behavior="4">
+            
+        </div>
+
+            <div id="main" data-behavior="4"
+                 class="hasCover
+                        hasCoverMetaOut
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Drop-seq: single-cell sequencing in large scale
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Wed Jan 13 2016 14:07:42 GMT-0500">
+	
+		    Jan 13, 2016
+    	
+    </time>
+    
+        <span>in category:  </span>
+        
+    <a class="category-link" href="/categories/Biology/">Biology</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p><a href="http://mccarrolllab.com/dropseq/" target="_blank" rel="external">Drop-seq</a> greatly improves the through-put of single-cell sequencing where transcriptome data of thousands of cells could be generated. This post highlights 3 features, 1 tech issue, 1 aspect of downstream analysis.</p>
+<a id="more"></a>
+<h1 id="STAMP"><a href="#STAMP" class="headerlink" title="STAMP"></a>STAMP</h1><p>STAMP: single-cell transcriptome attached to microparticle. Due to the primer bead design, i.e. Cell barcode + UMI, the source of single-cell’s transcriptome would not be ambiguous and rather clearly determined.</p>
+</div><div class="figure figure--fullWidth"><img class="figure-img" src="drop-seq-umi-design.png" alt="[Design of cell barcode and UMI]"><span class="caption">[Design of cell barcode and UMI]</span></div><div class="main-content-wrap">
+<h1 id="Not_compatible_for_pre-transcriptional_layer_2C_but__u2026"><a href="#Not_compatible_for_pre-transcriptional_layer_2C_but__u2026" class="headerlink" title="Not compatible for pre-transcriptional layer, but …"></a>Not compatible for pre-transcriptional layer, but …</h1><div class="figure center"><a class="fancybox" href="drop-seq-rna-hybrid.png" title=""><img class="fig-img" src="drop-seq-rna-hybrid.png" alt=""></a></div><div style="clear:both;"></div>
+<p>The poly-T end of the primer bead is responsible to attract the poly-A tail of mRNA. It is like Oligo dt primer in reverse transcription. Therefore only the matured mRNA will be captured. Any study at pre-transcriptional layer cannot use Drop-seq tech.</p>
+<p>However, oligo dt primer is not the only choice during cDNA library construction, but we still have random primer. In the same way, probably the poly-T end could be abandoned, or replaced by further rounds synthesis of UMI, because generating UMI is nothing but adding random A/G/C/T to the end of cell barcode.</p>
+<h1 id="Yes_2C_absolute_amount_of_transcriptome"><a href="#Yes_2C_absolute_amount_of_transcriptome" class="headerlink" title="Yes, absolute amount of transcriptome"></a>Yes, absolute amount of transcriptome</h1></div><div class="figure figure--fullWidth"><img class="figure-img" src="drop-seq-data.png" alt="[Pipeline of pre-processing reads of Drop-seq to data matrix]"><span class="caption">[Pipeline of pre-processing reads of Drop-seq to data matrix]</span></div><div class="main-content-wrap">
+<p>Counting the unique UMIs for each gene in each cell generating the absolute amount of transcripts expression. Yes, no more RPKM.</p>
+<p>Due to the PCR amplification with STAMPs as templates, generated sequencing signals are robust and in the same time UMIs are expected to be duplicated. Only unique ones are taken into account for yielding the digital expression matrix. Cooking the reads into data matrix is done by a Java software developed by Jim Nemesh (see analysis manual here: <a href="http://mccarrolllab.com/dropseq/" target="_blank" rel="external">http://mccarrolllab.com/dropseq/</a>)</p>
+<hr>
+<h1 id="Single_particle_binds__u2265_1_cells_3F_It_happens"><a href="#Single_particle_binds__u2265_1_cells_3F_It_happens" class="headerlink" title="Single particle binds ≥ 1 cells? It happens."></a>Single particle binds ≥ 1 cells? It happens.</h1><p>Referring to Fig-3, it happens when the concentration of cells is high thus one particle could possibly attach more than one cells.</p>
+<hr>
+<h1 id="Classifying_cells_using_tSNE"><a href="#Classifying_cells_using_tSNE" class="headerlink" title="Classifying cells using tSNE"></a>Classifying cells using tSNE</h1><p>The paper first performed PCA on original full features to abstract 32 significant PCs, then run tSNE on these PCs which further reduce dimension to 2D thus friendly for scatter plot.</p>
+<p>Classification is implemented by <a href="https://github.com/satijalab/seurat" target="_blank" rel="external">Seurat</a>, a R language package developed  and maintained by Rahul Satija lab. It follows GPL 3.0 license and I have implemented patches, <code>honflueR</code> (see github: <a href="https://github.com/Puriney/honfleuR" target="_blank" rel="external">https://github.com/Puriney/honfleuR</a>). Without violating <code>seurat</code> analysis context, it speeds up original functions and incorporates several new imputation strategies. </p>
+
+            
+                
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/R/">R</a> <a class="tag tag--primary tag--small t-link" href="/tags/drop-seq/">drop-seq</a> <a class="tag tag--primary tag--small t-link" href="/tags/sc-seq/">sc-seq</a> <a class="tag tag--primary tag--small t-link" href="/tags/seurat/">seurat</a> <a class="tag tag--primary tag--small t-link" href="/tags/single-cell-sequencing/">single cell sequencing</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/01/28/Hexo-blog/"  data-tooltip="Hexo blog">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yoursite.com/2016/01/13/Drop-seq-single-cell-sequencing-in-large-scale/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/01/13/Drop-seq-single-cell-sequencing-in-large-scale/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2016/01/13/Drop-seq-single-cell-sequencing-in-large-scale/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+    	This site aRtist by Yun Yan is licensed under a<br />
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/3.0/us/88x31.png" /></a><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 United States License</a>.
+
+    </span>
+
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/01/28/Hexo-blog/"  data-tooltip="Hexo blog">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yoursite.com/2016/01/13/Drop-seq-single-cell-sequencing-in-large-scale/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/01/13/Drop-seq-single-cell-sequencing-in-large-scale/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2016/01/13/Drop-seq-single-cell-sequencing-in-large-scale/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yoursite.com/2016/01/13/Drop-seq-single-cell-sequencing-in-large-scale/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/01/13/Drop-seq-single-cell-sequencing-in-large-scale/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2016/01/13/Drop-seq-single-cell-sequencing-in-large-scale/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/yunyan.jpg"/>
+        
+            <h4 id="about-card-name">Yun Yan</h4>
+        
+            <h5 id="about-card-bio"><p><a href="http://puriney.github.io/yunyan/about.html">U shall know the truth ;-)</a></p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Graduate Student in Computer Science</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                New York
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover2.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/scrip-gfmrkxcl0qohe3cfdgxhzvc0yrceqta8i4iix0txvn8q4o2adlqd5n0jmkvt.min.js" type="text/javascript"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://yoursite.com/2016/01/13/Drop-seq-single-cell-sequencing-in-large-scale/';
+                 
+                    this.page.identifier = '2016/01/13/Drop-seq-single-cell-sequencing-in-large-scale/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'puriney';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

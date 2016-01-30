@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[aRtist]]></title>
+  <subtitle><![CDATA[use the Force, read the source]]></subtitle>
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://yoursite.com/"/>
+  <updated>2016-01-30T00:00:11.000Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name><![CDATA[Yun Yan]]></name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Hexo blog]]></title>
+    <link href="http://yoursite.com/2016/01/28/Hexo-blog/"/>
+    <id>http://yoursite.com/2016/01/28/Hexo-blog/</id>
+    <published>2016-01-28T17:58:07.000Z</published>
+    <updated>2016-01-30T00:00:11.000Z</updated>
+    <content type="html"><![CDATA[<p>Testing post display in hexo blog system. </p>
+<a id="more"></a>
+<h1 id="Image"><a href="#Image" class="headerlink" title="Image"></a>Image</h1><div class="figure center"><a class="fancybox" href="cover2.jpg" title=""><img class="fig-img" src="cover2.jpg" style="width:50%;" alt=""></a></div>
+<!-- endcontent --><div class="figure figure--fullWidth"><img class="figure-img" src="cover2.jpg" alt="[title]"><span class="caption">[title]</span></div><!-- content -->
+<h1 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\frac&#123;\partial u&#125;&#123;\partial t&#125;&#10;= h^2 \left( \frac&#123;\partial^2 u&#125;&#123;\partial x^2&#125; +&#10;\frac&#123;\partial^2 u&#125;&#123;\partial y^2&#125; +&#10;\frac&#123;\partial^2 u&#125;&#123;\partial z^2&#125;\right)$$</span><br></pre></td></tr></table></figure>
+<p>$$\frac{\partial u}{\partial t}<br>= h^2 \left( \frac{\partial^2 u}{\partial x^2} +<br>\frac{\partial^2 u}{\partial y^2} +<br>\frac{\partial^2 u}{\partial z^2}\right)$$</p>
+<p>Inline equation: $a = b + c$ using <code>$a = b + c$</code>.</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><p>javascript: </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fancyAlert</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(arg) &#123;</span><br><span class="line">    $.facebox(&#123;div:<span class="string">'#foo'</span>&#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>R code: </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a &lt;- rnorm(<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a &lt;- rnorm(<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+<p>Bash: </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p><a rel="external" href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/3.0/us/88x31.png"></a><br>This work is licensed under a <a rel="external" href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/" target="_blank">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 United States License</a>.</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Testing post display in hexo blog system. </p>]]>
+    
+    </summary>
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+      <category term="sublime text" scheme="http://yoursite.com/tags/sublime-text/"/>
+    
+      <category term="qwert" scheme="http://yoursite.com/categories/qwert/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Drop-seq: single-cell sequencing in large scale]]></title>
+    <link href="http://yoursite.com/2016/01/13/Drop-seq-single-cell-sequencing-in-large-scale/"/>
+    <id>http://yoursite.com/2016/01/13/Drop-seq-single-cell-sequencing-in-large-scale/</id>
+    <published>2016-01-13T19:07:42.000Z</published>
+    <updated>2016-01-28T19:44:59.000Z</updated>
+    <content type="html"><![CDATA[<p><a href="http://mccarrolllab.com/dropseq/" target="_blank" rel="external">Drop-seq</a> greatly improves the through-put of single-cell sequencing where transcriptome data of thousands of cells could be generated. This post highlights 3 features, 1 tech issue, 1 aspect of downstream analysis.</p>
+<a id="more"></a>
+<h1 id="STAMP"><a href="#STAMP" class="headerlink" title="STAMP"></a>STAMP</h1><p>STAMP: single-cell transcriptome attached to microparticle. Due to the primer bead design, i.e. Cell barcode + UMI, the source of single-cell’s transcriptome would not be ambiguous and rather clearly determined.</p>
+<!-- endcontent --><div class="figure figure--fullWidth"><img class="figure-img" src="drop-seq-umi-design.png" alt="[Design of cell barcode and UMI]"><span class="caption">[Design of cell barcode and UMI]</span></div><!-- content -->
+<h1 id="Not_compatible_for_pre-transcriptional_layer_2C_but__u2026"><a href="#Not_compatible_for_pre-transcriptional_layer_2C_but__u2026" class="headerlink" title="Not compatible for pre-transcriptional layer, but …"></a>Not compatible for pre-transcriptional layer, but …</h1><div class="figure center"><a class="fancybox" href="drop-seq-rna-hybrid.png" title=""><img class="fig-img" src="drop-seq-rna-hybrid.png" alt=""></a></div><div style="clear:both;"></div>
+<p>The poly-T end of the primer bead is responsible to attract the poly-A tail of mRNA. It is like Oligo dt primer in reverse transcription. Therefore only the matured mRNA will be captured. Any study at pre-transcriptional layer cannot use Drop-seq tech.</p>
+<p>However, oligo dt primer is not the only choice during cDNA library construction, but we still have random primer. In the same way, probably the poly-T end could be abandoned, or replaced by further rounds synthesis of UMI, because generating UMI is nothing but adding random A/G/C/T to the end of cell barcode.</p>
+<h1 id="Yes_2C_absolute_amount_of_transcriptome"><a href="#Yes_2C_absolute_amount_of_transcriptome" class="headerlink" title="Yes, absolute amount of transcriptome"></a>Yes, absolute amount of transcriptome</h1><!-- endcontent --><div class="figure figure--fullWidth"><img class="figure-img" src="drop-seq-data.png" alt="[Pipeline of pre-processing reads of Drop-seq to data matrix]"><span class="caption">[Pipeline of pre-processing reads of Drop-seq to data matrix]</span></div><!-- content -->
+<p>Counting the unique UMIs for each gene in each cell generating the absolute amount of transcripts expression. Yes, no more RPKM.</p>
+<p>Due to the PCR amplification with STAMPs as templates, generated sequencing signals are robust and in the same time UMIs are expected to be duplicated. Only unique ones are taken into account for yielding the digital expression matrix. Cooking the reads into data matrix is done by a Java software developed by Jim Nemesh (see analysis manual here: <a href="http://mccarrolllab.com/dropseq/" target="_blank" rel="external">http://mccarrolllab.com/dropseq/</a>)</p>
+<hr>
+<h1 id="Single_particle_binds__u2265_1_cells_3F_It_happens"><a href="#Single_particle_binds__u2265_1_cells_3F_It_happens" class="headerlink" title="Single particle binds ≥ 1 cells? It happens."></a>Single particle binds ≥ 1 cells? It happens.</h1><p>Referring to Fig-3, it happens when the concentration of cells is high thus one particle could possibly attach more than one cells.</p>
+<hr>
+<h1 id="Classifying_cells_using_tSNE"><a href="#Classifying_cells_using_tSNE" class="headerlink" title="Classifying cells using tSNE"></a>Classifying cells using tSNE</h1><p>The paper first performed PCA on original full features to abstract 32 significant PCs, then run tSNE on these PCs which further reduce dimension to 2D thus friendly for scatter plot.</p>
+<p>Classification is implemented by <a href="https://github.com/satijalab/seurat" target="_blank" rel="external">Seurat</a>, a R language package developed  and maintained by Rahul Satija lab. It follows GPL 3.0 license and I have implemented patches, <code>honflueR</code> (see github: <a href="https://github.com/Puriney/honfleuR" target="_blank" rel="external">https://github.com/Puriney/honfleuR</a>). Without violating <code>seurat</code> analysis context, it speeds up original functions and incorporates several new imputation strategies. </p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><a href="http://mccarrolllab.com/dropseq/">Drop-seq</a> greatly improves the through-put of single-cell sequencing where transcriptome data of thousands of cells could be generated. This post highlights 3 features, 1 tech issue, 1 aspect of downstream analysis.</p>]]>
+    
+    </summary>
+    
+      <category term="R" scheme="http://yoursite.com/tags/R/"/>
+    
+      <category term="drop-seq" scheme="http://yoursite.com/tags/drop-seq/"/>
+    
+      <category term="sc-seq" scheme="http://yoursite.com/tags/sc-seq/"/>
+    
+      <category term="seurat" scheme="http://yoursite.com/tags/seurat/"/>
+    
+      <category term="single cell sequencing" scheme="http://yoursite.com/tags/single-cell-sequencing/"/>
+    
+      <category term="Biology" scheme="http://yoursite.com/categories/Biology/"/>
+    
+  </entry>
+  
+</feed>
